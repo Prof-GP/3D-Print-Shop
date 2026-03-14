@@ -1,0 +1,6 @@
+name = "PrintForge"
+license = "MIT"
+licenselink = ""
+description = "A dark, modern theme for 3D printing studios"
+homepage = ""
+min_version = "0.120.0"

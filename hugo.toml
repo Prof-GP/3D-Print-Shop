@@ -1,0 +1,35 @@
+baseURL = "https://example.com/"
+languageCode = "en-us"
+title = "PrintForge Studio"
+theme = "printforge"
+
+[params]
+  tagline = "Precision Prints, Brought to Life"
+  description = "Custom 3D prints crafted with care. Browse our collection or commission something unique."
+  email = "hello@printforgestudio.com"
+  formspreeID = "YOUR_FORMSPREE_ID"
+  featuredCount = 3
+
+[[menus.main]]
+  name = "Shop"
+  url = "/prints/"
+  weight = 10
+
+[[menus.main]]
+  name = "Gallery"
+  url = "/gallery/"
+  weight = 15
+
+[[menus.main]]
+  name = "Commission"
+  url = "/commission/"
+  weight = 20
+
+[[menus.main]]
+  name = "About"
+  url = "/about/"
+  weight = 30
+
+[taxonomies]
+  category = "categories"
+  tag = "tags"

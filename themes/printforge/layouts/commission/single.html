@@ -1,0 +1,196 @@
+{{ define "main" }}
+<section class="page-hero page-hero--short">
+  <div class="container">
+    <h1>Commission a Print</h1>
+    <p>Have a custom project in mind? Tell us about it and we'll bring it to life.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="commission-layout">
+
+      <!-- Form -->
+      <div class="commission-form-wrap">
+        <h2>Tell Us About Your Project</h2>
+        <p class="form-intro">Fill in as much detail as you can. The more information you provide, the more accurate your quote will be.</p>
+
+        <form
+          action="https://formspree.io/f/{{ .Site.Params.formspreeID }}"
+          method="POST"
+          class="commission-form"
+          enctype="multipart/form-data"
+          id="commissionForm"
+        >
+          <input type="hidden" name="_subject" value="New Commission Request - PrintForge Studio">
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="name">Your Name <span class="required">*</span></label>
+              <input type="text" id="name" name="name" required placeholder="Jane Smith">
+            </div>
+            <div class="form-group">
+              <label for="email">Email Address <span class="required">*</span></label>
+              <input type="email" id="email" name="email" required placeholder="jane@example.com">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="item">Item Name / Project Title <span class="required">*</span></label>
+            <input type="text" id="item" name="item" required placeholder="e.g. Dragon miniature, replacement bracket, cosplay helmet..." value="{{ .Page.Params.item }}">
+          </div>
+
+          <div class="form-group">
+            <label for="category">Category</label>
+            <select id="category" name="category">
+              <option value="">Select a category...</option>
+              <option value="miniature">Miniature / Figure</option>
+              <option value="functional">Functional Part</option>
+              <option value="decor">Home Decor</option>
+              <option value="cosplay">Cosplay Prop</option>
+              <option value="jewelry">Jewelry / Accessory</option>
+              <option value="other">Other</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="description">Project Description <span class="required">*</span></label>
+            <textarea id="description" name="description" required rows="5" placeholder="Describe your project in detail. Include dimensions, purpose, how it will be used, any special features needed..."></textarea>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="material">Preferred Material</label>
+              <select id="material" name="material">
+                <option value="">No preference</option>
+                <option value="pla">PLA (standard, eco-friendly)</option>
+                <option value="petg">PETG (durable, heat-resistant)</option>
+                <option value="abs">ABS (strong, impact-resistant)</option>
+                <option value="tpu">TPU (flexible, rubber-like)</option>
+                <option value="resin">Resin (high detail)</option>
+                <option value="unsure">Not sure — advise me</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="color">Preferred Color(s)</label>
+              <input type="text" id="color" name="color" placeholder="e.g. Matte black, any, custom painted...">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="dimensions">Approximate Dimensions</label>
+              <input type="text" id="dimensions" name="dimensions" placeholder="e.g. 15cm tall, 30x20x10cm...">
+            </div>
+            <div class="form-group">
+              <label for="quantity">Quantity</label>
+              <input type="number" id="quantity" name="quantity" min="1" value="1" placeholder="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="budget">Budget Range</label>
+            <select id="budget" name="budget">
+              <option value="">Prefer not to say</option>
+              <option value="under25">Under $25</option>
+              <option value="25-50">$25 – $50</option>
+              <option value="50-100">$50 – $100</option>
+              <option value="100-200">$100 – $200</option>
+              <option value="200+">$200+</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="deadline">Desired Completion Date</label>
+            <input type="date" id="deadline" name="deadline">
+          </div>
+
+          <div class="form-group">
+            <label for="reference">Reference Files or Links</label>
+            <input type="text" id="reference" name="reference" placeholder="Link to STL file, image, Thingiverse page, etc.">
+          </div>
+
+          <div class="form-group">
+            <label for="notes">Additional Notes</label>
+            <textarea id="notes" name="notes" rows="3" placeholder="Anything else we should know? Surface finish preferences, post-processing needs, painting, assembly..."></textarea>
+          </div>
+
+          <!-- Honeypot -->
+          <input type="text" name="_gotcha" style="display:none" tabindex="-1" autocomplete="off">
+
+          <div class="form-submit">
+            <button type="submit" class="btn btn-primary btn-lg">Send Commission Request</button>
+            <p class="form-note">We'll respond within 1–2 business days with a detailed quote.</p>
+          </div>
+        </form>
+
+        <div class="form-success" id="formSuccess" hidden>
+          <div class="success-icon">&#10003;</div>
+          <h3>Request Received!</h3>
+          <p>Thanks for reaching out. We'll review your project and get back to you within 1–2 business days.</p>
+          <a href="/prints/" class="btn btn-outline">Browse the Shop</a>
+        </div>
+      </div>
+
+      <!-- Sidebar -->
+      <aside class="commission-sidebar">
+        <div class="sidebar-card">
+          <h3>What to Expect</h3>
+          <ul class="checklist">
+            <li>Quote within 1–2 business days</li>
+            <li>Free design consultation</li>
+            <li>Print time: 2–10 days depending on complexity</li>
+            <li>Revision support before final print</li>
+            <li>Secure packaging for shipping</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Materials We Use</h3>
+          <ul class="material-list">
+            <li><strong>PLA</strong> — Great for display pieces, eco-friendly</li>
+            <li><strong>PETG</strong> — Food-safe, heat resistant up to 80°C</li>
+            <li><strong>ABS</strong> — Tough, good for mechanical parts</li>
+            <li><strong>TPU</strong> — Flexible, rubberlike</li>
+            <li><strong>Resin</strong> — Ultra-fine detail (best for minis)</li>
+          </ul>
+        </div>
+
+        <div class="sidebar-card">
+          <h3>Have a File Ready?</h3>
+          <p>If you already have an STL, OBJ, or 3MF file, drop the link or mention it in the reference field. We can also work from sketches or photos.</p>
+        </div>
+
+        <div class="sidebar-card sidebar-card--cta">
+          <h3>Just want to chat?</h3>
+          <p>Email us directly at:</p>
+          <a href="mailto:{{ .Site.Params.email }}" class="email-link">{{ .Site.Params.email }}</a>
+        </div>
+      </aside>
+
+    </div>
+  </div>
+</section>
+
+<script>
+  const form = document.getElementById('commissionForm');
+  const success = document.getElementById('formSuccess');
+  if (form) {
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      const data = new FormData(form);
+      try {
+        const res = await fetch(form.action, { method: 'POST', body: data, headers: { Accept: 'application/json' } });
+        if (res.ok) {
+          form.hidden = true;
+          success.hidden = false;
+        } else {
+          alert('Something went wrong. Please try again or email us directly.');
+        }
+      } catch {
+        alert('Network error. Please email us directly.');
+      }
+    });
+  }
+</script>
+{{ end }}

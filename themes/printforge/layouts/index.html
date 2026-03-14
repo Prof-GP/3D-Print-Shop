@@ -1,0 +1,179 @@
+{{ define "main" }}
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg-grid" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-content">
+      <span class="hero-badge">Handcrafted &amp; Made to Order</span>
+      <h1>{{ .Site.Params.tagline }}</h1>
+      <p class="hero-sub">{{ .Site.Params.description }}</p>
+      <div class="hero-actions">
+        <a href="/prints/" class="btn btn-primary btn-lg">Browse the Shop</a>
+        <a href="/commission/" class="btn btn-outline btn-lg">Commission a Print</a>
+      </div>
+    </div>
+    <div class="hero-visual" aria-hidden="true">
+      <div class="layer-card">
+        <div class="layer" style="--i:0"></div>
+        <div class="layer" style="--i:1"></div>
+        <div class="layer" style="--i:2"></div>
+        <div class="layer" style="--i:3"></div>
+        <div class="layer" style="--i:4"></div>
+        <div class="layer" style="--i:5"></div>
+        <div class="layer" style="--i:6"></div>
+        <div class="layer" style="--i:7"></div>
+        <div class="layer" style="--i:8"></div>
+        <div class="layer" style="--i:9"></div>
+        <div class="layer" style="--i:10"></div>
+        <div class="layer" style="--i:11"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<section class="stats">
+  <div class="container">
+    <div class="stats-grid">
+      <div class="stat">
+        <span class="stat-number">100+</span>
+        <span class="stat-label">Prints Delivered</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">15+</span>
+        <span class="stat-label">Materials Available</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">0.1mm</span>
+        <span class="stat-label">Layer Resolution</span>
+      </div>
+      <div class="stat">
+        <span class="stat-number">5★</span>
+        <span class="stat-label">Average Rating</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Prints -->
+<section class="section featured-prints">
+  <div class="container">
+    <div class="section-header">
+      <h2>Featured Prints</h2>
+      <a href="/prints/" class="link-arrow">View all prints &rarr;</a>
+    </div>
+    <div class="prints-grid">
+      {{ $featured := where (where .Site.RegularPages "Section" "prints") ".Params.featured" true }}
+      {{ $count := .Site.Params.featuredCount | int }}
+      {{ range first $count $featured }}
+      {{ partial "print-card.html" . }}
+      {{ end }}
+      {{ if eq (len $featured) 0 }}
+      {{ range first 3 (where .Site.RegularPages "Section" "prints") }}
+      {{ partial "print-card.html" . }}
+      {{ end }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section class="section how-it-works">
+  <div class="container">
+    <div class="section-header centered">
+      <h2>How Commissioning Works</h2>
+      <p>From idea to doorstep in a few simple steps.</p>
+    </div>
+    <div class="steps-grid">
+      <div class="step">
+        <div class="step-number">01</div>
+        <h3>Describe Your Idea</h3>
+        <p>Fill out the commission form with your design concept, dimensions, and any reference images.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">02</div>
+        <h3>Get a Quote</h3>
+        <p>We'll review your request and send a detailed quote within 1–2 business days.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">03</div>
+        <h3>Approve &amp; Print</h3>
+        <p>Once you approve the design and quote, we start printing your item with precision.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">04</div>
+        <h3>Delivered to You</h3>
+        <p>Your finished print is carefully packaged and shipped straight to your door.</p>
+      </div>
+    </div>
+    <div class="centered-action">
+      <a href="/commission/" class="btn btn-primary btn-lg">Start Your Commission</a>
+    </div>
+  </div>
+</section>
+
+<!-- Categories -->
+<section class="section categories-section">
+  <div class="container">
+    <div class="section-header centered">
+      <h2>What We Print</h2>
+    </div>
+    <div class="categories-grid">
+      <a href="/categories/miniatures/" class="category-card">
+        <div class="category-icon">&#9876;</div>
+        <h3>Miniatures</h3>
+        <p>Detailed figures for tabletop gaming, collections, and display.</p>
+      </a>
+      <a href="/categories/functional/" class="category-card">
+        <div class="category-icon">&#9881;</div>
+        <h3>Functional Parts</h3>
+        <p>Replacement parts, organizers, brackets, and custom tools.</p>
+      </a>
+      <a href="/categories/decor/" class="category-card">
+        <div class="category-icon">&#10022;</div>
+        <h3>Home Decor</h3>
+        <p>Vases, sculptures, planters, and artistic pieces for your space.</p>
+      </a>
+      <a href="/categories/cosplay/" class="category-card">
+        <div class="category-icon">&#9670;</div>
+        <h3>Cosplay Props</h3>
+        <p>Helmets, armor pieces, weapons, and accessories for any character.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="section testimonials">
+  <div class="container">
+    <div class="section-header centered">
+      <h2>What Customers Say</h2>
+    </div>
+    <div class="testimonials-grid">
+      <blockquote class="testimonial">
+        <p>"The quality of the miniatures blew me away. Paint-ready out of the box with zero stringing. Will definitely order again!"</p>
+        <cite>— Alex M., Tabletop Gamer</cite>
+      </blockquote>
+      <blockquote class="testimonial">
+        <p>"I needed a replacement bracket for an old appliance. They printed it perfectly from my rough sketch. Saved me so much money."</p>
+        <cite>— Jordan K., DIY Enthusiast</cite>
+      </blockquote>
+      <blockquote class="testimonial">
+        <p>"My cosplay helmet was perfectly sized and incredibly strong. Got so many compliments at the convention!"</p>
+        <cite>— Sam R., Cosplayer</cite>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-banner">
+  <div class="container">
+    <h2>Have something in mind?</h2>
+    <p>We turn ideas into reality. Tell us what you need and we'll make it happen.</p>
+    <a href="/commission/" class="btn btn-primary btn-lg">Commission a Custom Print</a>
+  </div>
+</section>
+
+{{ end }}

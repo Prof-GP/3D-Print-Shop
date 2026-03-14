@@ -1,0 +1,109 @@
+{{ define "main" }}
+<section class="section">
+  <div class="container">
+    <nav class="breadcrumb" aria-label="Breadcrumb">
+      <a href="/">Home</a> &rsaquo;
+      <a href="/prints/">Shop</a> &rsaquo;
+      <span>{{ .Title }}</span>
+    </nav>
+
+    <div class="product-layout">
+      <!-- Image Gallery -->
+      <div class="product-gallery">
+        {{ if .Params.image }}
+        <div class="product-main-image">
+          <img src="{{ .Params.image }}" alt="{{ .Title }}" id="mainImage">
+        </div>
+        {{ if .Params.images }}
+        <div class="product-thumbs">
+          <button class="thumb active" onclick="setImage('{{ .Params.image }}', this)">
+            <img src="{{ .Params.image }}" alt="View 1">
+          </button>
+          {{ range .Params.images }}
+          <button class="thumb" onclick="setImage('{{ . }}', this)">
+            <img src="{{ . }}" alt="Additional view">
+          </button>
+          {{ end }}
+        </div>
+        {{ end }}
+        {{ else }}
+        <div class="product-placeholder">
+          <svg width="80" height="80" viewBox="0 0 80 80" fill="none">
+            <polygon points="40,6 74,24 74,56 40,74 6,56 6,24" fill="none" stroke="#f97316" stroke-width="2" opacity="0.4"/>
+            <polygon points="40,22 58,32 58,52 40,62 22,52 22,32" fill="#f97316" opacity="0.1"/>
+          </svg>
+          <p>Photo coming soon</p>
+        </div>
+        {{ end }}
+      </div>
+
+      <!-- Product Info -->
+      <div class="product-info">
+        {{ if .Params.categories }}
+        <span class="print-category">{{ index .Params.categories 0 }}</span>
+        {{ end }}
+        <h1>{{ .Title }}</h1>
+
+        {{ if .Params.price }}
+        <div class="product-price">
+          <span class="price-current">${{ .Params.price }}</span>
+          {{ if .Params.priceNote }}<span class="price-note">{{ .Params.priceNote }}</span>{{ end }}
+        </div>
+        {{ end }}
+
+        <div class="product-description">
+          {{ .Content }}
+        </div>
+
+        {{ if .Params.specs }}
+        <div class="product-specs">
+          <h3>Specifications</h3>
+          <dl>
+            {{ range $key, $val := .Params.specs }}
+            <div class="spec-row">
+              <dt>{{ $key }}</dt>
+              <dd>{{ $val }}</dd>
+            </div>
+            {{ end }}
+          </dl>
+        </div>
+        {{ end }}
+
+        <div class="product-actions">
+          <a href="/commission/?item={{ .Title | urlize }}" class="btn btn-primary btn-lg">Order / Commission</a>
+          <a href="/commission/" class="btn btn-outline">Ask a Question</a>
+        </div>
+
+        {{ if .Params.tags }}
+        <div class="product-tags">
+          {{ range .Params.tags }}
+          <a href="/tags/{{ . | urlize }}/" class="tag">#{{ . }}</a>
+          {{ end }}
+        </div>
+        {{ end }}
+      </div>
+    </div>
+
+    <!-- Related Prints -->
+    {{ $related := .Site.RegularPages.Related . | first 3 }}
+    {{ if $related }}
+    <div class="related-prints">
+      <h2>You might also like</h2>
+      <div class="prints-grid">
+        {{ range $related }}
+        {{ partial "print-card.html" . }}
+        {{ end }}
+      </div>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<script>
+function setImage(src, btn) {
+  document.getElementById('mainImage').src = src;
+  document.querySelectorAll('.thumb').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+}
+</script>
+{{ end }}

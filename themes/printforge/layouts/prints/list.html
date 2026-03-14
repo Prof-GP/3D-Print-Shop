@@ -1,0 +1,41 @@
+{{ define "main" }}
+<section class="page-hero page-hero--short">
+  <div class="container">
+    <h1>Shop Prints</h1>
+    <p>Browse our collection of ready-to-ship and made-to-order 3D prints.</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <!-- Filter Bar -->
+    <div class="filter-bar">
+      <span class="filter-label">Filter by:</span>
+      <a href="/prints/" class="filter-btn {{ if not .IsPage }}active{{ end }}">All</a>
+      {{ range .Site.Taxonomies.categories.ByCount }}
+      <a href="{{ .Page.RelPermalink }}" class="filter-btn">{{ .Page.Title }}</a>
+      {{ end }}
+    </div>
+
+    {{ if .Pages }}
+    <div class="prints-grid prints-grid--full">
+      {{ range .Pages }}
+      {{ partial "print-card.html" . }}
+      {{ end }}
+    </div>
+    {{ else }}
+    <div class="empty-state">
+      <p>No prints listed yet. Check back soon — or <a href="/commission/">commission something custom!</a></p>
+    </div>
+    {{ end }}
+  </div>
+</section>
+
+<section class="cta-banner">
+  <div class="container">
+    <h2>Don't see what you're looking for?</h2>
+    <p>We can print almost anything. Send us your idea and we'll make it happen.</p>
+    <a href="/commission/" class="btn btn-primary btn-lg">Request a Custom Print</a>
+  </div>
+</section>
+{{ end }}

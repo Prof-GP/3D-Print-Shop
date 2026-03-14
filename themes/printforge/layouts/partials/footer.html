@@ -1,0 +1,27 @@
+<footer class="site-footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <p class="footer-logo">{{ .Site.Title }}</p>
+        <p>Precision 3D prints made to order. High-quality PLA, PETG, and resin prints for every need.</p>
+      </div>
+      <div class="footer-links">
+        <h3>Navigate</h3>
+        <ul>
+          {{ range .Site.Menus.main }}
+          <li><a href="{{ .URL }}">{{ .Name }}</a></li>
+          {{ end }}
+        </ul>
+      </div>
+      <div class="footer-contact">
+        <h3>Contact</h3>
+        <p><a href="mailto:{{ .Site.Params.email }}">{{ .Site.Params.email }}</a></p>
+        <p>Response time: 1–2 business days</p>
+        <a href="/commission/" class="btn btn-outline">Start a Commission</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p>&copy; {{ now.Year }} {{ .Site.Title }}. All rights reserved.</p>
+    </div>
+  </div>
+</footer>

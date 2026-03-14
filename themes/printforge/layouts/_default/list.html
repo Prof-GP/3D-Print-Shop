@@ -1,0 +1,16 @@
+{{ define "main" }}
+<section class="page-hero page-hero--short">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+  </div>
+</section>
+<section class="section">
+  <div class="container">
+    <div class="prints-grid prints-grid--full">
+      {{ range .Pages }}
+      {{ partial "print-card.html" . }}
+      {{ end }}
+    </div>
+  </div>
+</section>
+{{ end }}

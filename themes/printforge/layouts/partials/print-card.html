@@ -1,0 +1,30 @@
+<article class="print-card">
+  <a href="{{ .RelPermalink }}" class="print-card-image-link">
+    {{ if .Params.image }}
+    <img src="{{ .Params.image }}" alt="{{ .Title }}" loading="lazy" class="print-card-image">
+    {{ else }}
+    <div class="print-card-placeholder" aria-label="{{ .Title }} preview">
+      <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polygon points="24,4 44,15 44,33 24,44 4,33 4,15" fill="none" stroke="#f97316" stroke-width="2" opacity="0.5"/>
+        <polygon points="24,14 34,20 34,32 24,38 14,32 14,20" fill="#f97316" opacity="0.15"/>
+      </svg>
+    </div>
+    {{ end }}
+    {{ if .Params.badge }}
+    <span class="print-badge">{{ .Params.badge }}</span>
+    {{ end }}
+  </a>
+  <div class="print-card-body">
+    {{ if .Params.categories }}
+    <span class="print-category">{{ index .Params.categories 0 }}</span>
+    {{ end }}
+    <h3><a href="{{ .RelPermalink }}">{{ .Title }}</a></h3>
+    <p class="print-desc">{{ .Description | default (.Summary | truncate 80) }}</p>
+    <div class="print-card-footer">
+      {{ if .Params.price }}
+      <span class="print-price">${{ .Params.price }}</span>
+      {{ end }}
+      <a href="{{ .RelPermalink }}" class="btn btn-sm btn-outline">View Details</a>
+    </div>
+  </div>
+</article>
